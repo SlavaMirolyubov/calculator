@@ -22,6 +22,10 @@ public class Validator {
                 .replaceAll("\\(-", "(0-")
                 .replaceAll("\\(\\+", "(0+");
 
+        if (expression.charAt(0) == '-') {
+            expression = "0" + expression;
+        }
+
         Matcher matcherForNotNumbers = Pattern.compile("[^(.)/*\\-+0-9]").matcher(expression);
         Matcher matcherForRepeatOps = Pattern.compile("[./*\\-+]{2,}").matcher(expression);
         Matcher matcherForBrackets = Pattern.compile("[(][/*][(]|[)][/*][)]").matcher(expression);
