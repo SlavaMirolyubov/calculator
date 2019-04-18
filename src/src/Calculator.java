@@ -10,17 +10,17 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Calculator {
+class Calculator {
 
-    ArrayList<String> inputArray = new ArrayList<>();
-    Stack<String> operators = new Stack<>();
-    Stack<String> outStroke = new Stack<>();
+    private ArrayList<String> inputArray = new ArrayList<>();
+    private Stack<String> operators = new Stack<>();
+    private Stack<String> outStroke = new Stack<>();
 
-    Priority priority = new Priority();
+    private Priority priority = new Priority();
 
-    Validator validator = new Validator();
+    private Validator validator = new Validator();
 
-    public void calculate(String expression) {
+    void calculate(String expression) {
 
         expression = validator.validate(expression);
 
@@ -32,10 +32,8 @@ public class Calculator {
 
         fillRPNStack(inputArray);
 
-        try {
-            resultString = countFromRPN().toString();
-        } catch (DivideByZeroException ignored) {
-        }
+        resultString = countFromRPN().toString();
+
 
         System.out.println(resultString);
 
@@ -55,42 +53,46 @@ public class Calculator {
     private void fillRPNStack(ArrayList<String> list) {
 
         for (String elem : list) {
+
             if (elem.matches("[\\d?.]+")) {
                 outStroke.push(elem);
-            }
-            else if (elem.equals("(")) {
+            } else if (elem.equals("(")) {
                 operators.push(elem);
-            }
-            else if (elem.equals(")")) {
+            } else if (elem.equals(")")) {
                 while (!operators.isEmpty() && !operators.peek().equals("(")) {
                     outStroke.push(operators.pop());
                 }
+
                 if (!operators.isEmpty() && operators.peek().equals("(")) {
                     operators.pop();
                 } else {
                     throw new BracketsException("Несогласованность скобок");
                 }
-            }
-            else if (elem.matches("[/*\\-+]")) {
+            } else if (elem.matches("[/*\\-+]")) {
+
                 if (!operators.isEmpty() && (priority.getPriority(elem) <= priority.getPriority(operators.peek()))) {
                     while (!operators.isEmpty() && (priority.getPriority(operators.peek()) >= priority.getPriority(elem))) {
                         outStroke.push(operators.pop());
                     }
                 }
                 operators.push(elem);
+
             }
         }
+
         if (!operators.isEmpty()) {
             while (!operators.isEmpty()) {
+
                 if (operators.peek().equals("(")) {
                     throw new BracketsException("Несогласованность скобок");
                 }
                 outStroke.push(operators.pop());
+
             }
         }
     }
 
-    public BigDecimal countFromRPN() throws DivideByZeroException {
+    private BigDecimal countFromRPN() throws DivideByZeroException {
 
         Stack<BigDecimal> result = new Stack<>();
 

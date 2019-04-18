@@ -1,8 +1,8 @@
 package src;
 
-public class Priority {
+class Priority {
 
-    public int getPriority(String str) {
+    int getPriority(String str) {
         switch (str) {
             case "*" :
             case "/" :

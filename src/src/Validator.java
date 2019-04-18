@@ -5,9 +5,9 @@ import src.MyExceptions.BadSymbolException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validator {
+class Validator {
 
-    public boolean isNumber (String str) {
+    boolean isNumber(String str) {
         try {
             Double.parseDouble(str);
             return true;
@@ -16,7 +16,7 @@ public class Validator {
         }
     }
 
-    public String validate(String expression) {
+    String validate(String expression) {
 
         expression = expression
                 .replaceAll(" ", "")

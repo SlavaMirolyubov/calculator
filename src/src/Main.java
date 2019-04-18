@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        new Calculator().calculate("-65*9-9+6r");
+        new Calculator().calculate("-65*9-9+6/0");
 
         // 2.3-8/(35,9+2*7/(-2))-9*2
         // 5 * (10 + 81 / (5 + 4) * 9) + (8 / (9 - 5) - 11.5)
