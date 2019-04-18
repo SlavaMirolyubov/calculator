@@ -1,5 +1,7 @@
 package src;
 
+import src.MyExceptions.BadSymbolException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,8 +39,7 @@ public class Validator {
         boolean findBadSymbols4 = matcherForNumNearBrackets.find();
 
         if (findBadSymbols | findBadSymbols2 | findBadSymbols3 | findBadSymbols4) {
-            System.out.println("Недопустимая строка");
-            System.exit(0);
+            throw new BadSymbolException("Недопустимая строка");
         }
 
         return expression;

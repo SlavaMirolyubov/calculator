@@ -77,7 +77,7 @@ public class Calculator {
                         outStroke.push(operators.pop());
                     }
                 }
-                    operators.push(elem);
+                operators.push(elem);
             }
         }
         if (!operators.isEmpty()) {
